@@ -12,7 +12,7 @@ public partial class EcommerceDbContext : DbContext
         _configuration = configuration;
     }
     public EcommerceDbContext(DbContextOptions<EcommerceDbContext> options, IConfiguration configuration)
-      : base(options)
+        : base(options)
     {
         _configuration = configuration;
     }

@@ -15,7 +15,7 @@ namespace ecommerce_server.Controllers
     {
         private readonly EcommerceDbContext _context;
 
-            public UsersController(EcommerceDbContext context)
+        public UsersController(EcommerceDbContext context)
         {
             _context = context;
         }
