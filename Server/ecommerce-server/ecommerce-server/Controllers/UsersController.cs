@@ -77,6 +77,13 @@ namespace ecommerce_server.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
+            if (user != null)
+            {
+                byte[] salt = Helper.Helper.GenerateSalt(); 
+                user.PasswordSalt = Convert.ToBase64String(salt);
+                user.PasswordHash = Convert.ToBase64String(Helper.Helper.GenerateHash(user.PasswordHash, salt));
+            }
+
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
