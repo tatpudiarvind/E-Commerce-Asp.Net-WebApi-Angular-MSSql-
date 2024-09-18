@@ -6,14 +6,17 @@ namespace ecommerce_server.Models;
 
 public partial class EcommerceDbContext : DbContext
 {
-    public EcommerceDbContext()
+    private readonly IConfiguration _configuration;
+    public EcommerceDbContext(IConfiguration configuration)
     {
+        _configuration = configuration;
+    }
+    public EcommerceDbContext(DbContextOptions<EcommerceDbContext> options, IConfiguration configuration)
+      : base(options)
+    {
+        _configuration = configuration;
     }
 
-    public EcommerceDbContext(DbContextOptions<EcommerceDbContext> options)
-        : base(options)
-    {
-    }
 
     public virtual DbSet<Address> Addresses { get; set; }
 
@@ -40,9 +43,13 @@ public partial class EcommerceDbContext : DbContext
     public virtual DbSet<UserRole> UserRoles { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=.;Database=ecommerce_db;Trusted_Connection=True;Encrypt=False;");
-
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            var connectionString = _configuration.GetConnectionString("EcommerceDatabase");
+            optionsBuilder.UseSqlServer(connectionString);
+        }
+    }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Address>(entity =>
