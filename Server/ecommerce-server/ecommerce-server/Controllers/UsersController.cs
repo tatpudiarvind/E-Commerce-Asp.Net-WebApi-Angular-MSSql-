@@ -31,8 +31,6 @@ namespace ecommerce_server.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            string x = "test";
-            x.ToCharArray
             var user = await _context.Users.FindAsync(id);
 
             if (user == null)
