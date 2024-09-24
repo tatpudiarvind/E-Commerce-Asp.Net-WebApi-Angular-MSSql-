@@ -17,7 +17,6 @@ public partial class EcommerceDbContext : DbContext
         _configuration = configuration;
     }
 
-
     public virtual DbSet<Address> Addresses { get; set; }
 
     public virtual DbSet<Category> Categories { get; set; }
