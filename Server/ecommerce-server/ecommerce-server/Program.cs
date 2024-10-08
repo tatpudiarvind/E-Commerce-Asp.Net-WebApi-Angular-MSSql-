@@ -15,6 +15,16 @@ namespace ecommerce_server
             // Register the DbContext with a connection string
             builder.Services.AddDbContext<EcommerceDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("EcommerceDatabase")));
+            
+            // Add CORS services to the container.
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAngularApp",
+                    builder => builder
+                    .WithOrigins("http://localhost:4200")  // Allow requests from Angular frontend
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
+            });
 
 
             builder.Services.AddControllers();
@@ -23,7 +33,10 @@ namespace ecommerce_server
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
-
+            
+            // Enable CORS
+            app.UseCors("AllowAngularApp");
+            
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

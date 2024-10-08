@@ -23,7 +23,7 @@ namespace ecommerce_server.Controllers
         // GET: api/Users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
-        {
+        {   
             return await _context.Users.ToListAsync();
         }
 
