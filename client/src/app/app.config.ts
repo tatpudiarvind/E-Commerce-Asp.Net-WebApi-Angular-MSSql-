@@ -13,10 +13,11 @@ import { DropdownModule, SidebarModule } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { routes } from './app.routes';
 import { ReactiveFormsModule } from '@angular/forms';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 
 export const appConfig: ApplicationConfig = {
-  providers: [
+  providers: [ provideHttpClient(withInterceptorsFromDi()),  // Correct placement of provideHttpClient
     provideRouter(routes,
       withRouterConfig({
         onSameUrlNavigation: 'reload'

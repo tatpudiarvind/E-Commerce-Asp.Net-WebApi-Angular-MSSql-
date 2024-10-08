@@ -11,7 +11,7 @@
                 <span cInputGroupText>
                   <svg cIcon name="cilUser"></svg>
                 </span>
-                <input formControlName="username" autoComplete="name" cFormControl placeholder="Username" />
+                <input formControlName="fullname" autoComplete="name" cFormControl placeholder="Full Name" />
               </c-input-group>
               <c-input-group class="mb-3">
                 <span cInputGroupText>&#64;</span>
@@ -29,6 +29,38 @@
                 </span>
                 <input formControlName="confirm_password" autoComplete="new-password" cFormControl placeholder="Repeat password" type="password" />
               </c-input-group>
+              <c-input-group class="mb-4">
+                <span cInputGroupText>
+                  <svg cIcon  name="cilPhone"></svg>
+                </span>
+                <input formControlName="phone" autoComplete="new-password" cFormControl placeholder="Phone"/>
+              </c-input-group>
+              <c-input-group class="mb-4">
+                <span cInputGroupText>
+                  <svg cIcon name="cilScrubber"></svg>
+                </span>
+                <div class="d-flex ms-3">
+                  <c-form-check inline class="me-3">
+                    <input formControlName="status" cFormCheckInput id="radioinline1" name="status" type="radio" value="active" />
+                    <label cFormCheckLabel for="radioinline1">Active</label>
+                  </c-form-check>
+                  <c-form-check inline>
+                    <input formControlName="status" cFormCheckInput id="radioinline2" name="status" type="radio" value="inactive" />
+                    <label cFormCheckLabel for="radioinline2">Inactive</label>
+                  </c-form-check>
+                </div>
+              </c-input-group>
+              <c-input-group class="mb-4">
+                <span cInputGroupText>
+                  <svg cIcon name="cilEqualizer"></svg>
+                </span>
+                <select formControlName="role" aria-label="Default select example" cSelect>
+                  <option>Select Role (disabled)</option>
+                  <option value="1">Admin</option>
+                  <option value="2">Customer</option>
+                  <option value="3">Sales</option>
+                </select>
+            </c-input-group>
               <div class="d-grid">
                 <button type="submit" cButton color="success">Create Account</button>
               </div>
